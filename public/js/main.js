@@ -22,17 +22,17 @@ async function generateImageRequest(prompt, size) {
         const response = await fetch('/openai/generateimage', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 prompt,
-                size
-            })
+                size,
+            }),
         });
 
         if (!response.ok) {
             removeSpinner();
-            throw new Error('That image could not be generated')
+            throw new Error('That image could not be generated');
         }
 
         const data = await response.json();
@@ -43,7 +43,6 @@ async function generateImageRequest(prompt, size) {
         document.querySelector('#image').src = imageUrl;
 
         removeSpinner();
-
     } catch (error) {
         document.querySelector('.msg').textContent = error;
     }
